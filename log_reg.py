@@ -63,3 +63,13 @@ plt.show()
 
 y_pred_binary = (y_pred_proba > 0.5).astype(int)
 cm = confusion_matrix(y_test, y_pred_binary)
+
+figure, ax = plt.subplots(figsize=(5, 5))
+ax.set_facecolor('white')
+sns.heatmap(cm, annot=True, fmt='d', cmap='Purples',
+            xticklabels=['Background', 'Signal'],
+            yticklabels=['Background', 'Signal'])
+plt.title('Confusion Matrix', fontsize=16)
+plt.ylabel('Actual Label', fontsize=12)
+plt.xlabel('Predicted Label', fontsize=12)
+plt.show()
