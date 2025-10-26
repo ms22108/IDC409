@@ -22,5 +22,10 @@ upper_tri = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bo
 # drop highly correlated features
 correlation_threshold = 0.9
 to_drop = [column for column in upper_tri.columns if any(upper_tri[column] > correlation_threshold)]
+print(f"Number of features before reduction: {df.shape[1] - 3}")
+print(f"Number of features to drop: {len(to_drop)}")
+print(f"Features to drop: {to_drop}")
+df_reduced = df.drop(columns=to_drop)
+print(f"\nNumber of features after reduction: {df_reduced.shape[1] - 3}")
 
 
