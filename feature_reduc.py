@@ -16,4 +16,11 @@ sns.set(font_scale=0.9)
 plt.figure(figsize=(15, 15))
 sns.heatmap(corr_matrix, cmap='magma', annot=False)
 
+# avoid dropping both columns by considering upper triangle
+upper_tri = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
+
+# drop highly correlated features
+correlation_threshold = 0.9
+to_drop = [column for column in upper_tri.columns if any(upper_tri[column] > correlation_threshold)]
+
 
