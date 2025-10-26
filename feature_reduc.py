@@ -35,3 +35,11 @@ sns.set(font_scale=0.8)
 sns.heatmap(new_corr_matrix, cmap='magma', annot=False)
 plt.title("New correlation matrix")
 
+# rank reduced features
+from sklearn.ensemble import RandomForestClassifier
+y = df['is_signal']
+
+#feature_columns
+model = RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1)
+model.fit(feature_columns, y)
+
