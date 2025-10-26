@@ -14,3 +14,14 @@ X_train, X_test, y_train, y_test = train_test_split(
     test_size=0.3,
     random_state=42,
     stratify=y)
+
+# log reg classifier
+log_reg_classifier = LogisticRegression(
+    solver='liblinear',
+    C=0.1,
+    random_state=42,
+    max_iter=1000 # increase iterations for convergence with many features
+)
+log_reg_classifier.fit(X_train, y_train)
+
+y_pred_proba = log_reg_classifier.predict_proba(X_test)[:, 1]
