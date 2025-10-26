@@ -31,3 +31,16 @@ results_df = pd.DataFrame({'true_label': y_test, 'logreg_score': y_pred_proba})
 signal_scores = results_df[results_df['true_label'] == 1]['logreg_score']
 background_scores = results_df[results_df['true_label'] == 0]['logreg_score']
 
+# classifier output
+figure, ax = plt.subplots(figsize=(10, 6))
+ax.set_facecolor('white')
+plt.hist(background_scores, bins=50, range=(0, 1), label='Background (Continuum)',
+         histtype='step', density=True, color='red', linewidth=2)
+plt.hist(signal_scores, bins=50, range=(0, 1), label='Signal',
+         histtype='step', density=True, color='blue', linewidth=2)
+plt.title('Logistic Regression Classifier Output', fontsize=16)
+plt.xlabel('Model Score (Probability)', fontsize=12)
+plt.ylabel('Normalized Frequency', fontsize=12)
+plt.legend(facecolor='white')
+plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+plt.show()
