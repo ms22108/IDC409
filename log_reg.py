@@ -44,3 +44,22 @@ plt.ylabel('Normalized Frequency', fontsize=12)
 plt.legend(facecolor='white')
 plt.grid(True, which='both', linestyle='--', linewidth=0.5)
 plt.show()
+
+# plotting roc curve
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba)
+auc_score = roc_auc_score(y_test, y_pred_proba) # area
+
+figure, ax = plt.subplots(figsize=(6, 5))
+ax.set_facecolor('white')
+plt.plot(fpr, tpr, label=f'Logistic Regression (AUC = {auc_score:.4f})', color='purple', lw=2)
+plt.xlabel('Signal Efficiency (True Positive Rate)', fontsize=12)
+plt.ylabel('Background Rejection (False Positive Rate)', fontsize=12)
+plt.title('Receiver Operating Characteristic (ROC) Curve', fontsize=16)
+plt.legend(loc='lower left', facecolor='white')
+plt.grid(True, linestyle='--', linewidth=0.5)
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.show()
+
+y_pred_binary = (y_pred_proba > 0.5).astype(int)
+cm = confusion_matrix(y_test, y_pred_binary)
