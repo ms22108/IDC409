@@ -32,4 +32,9 @@ def feature_dist(feature_to_plot, title_add=None, both=None, x_axis_lim = None, 
     else: plt.xlim(x_axis_lim)
 
     # setting y axis scale
-    if y_log == True: plt.yscale('log')    
+    if y_log == True: plt.yscale('log')   
+    # plotting a continuous distribution
+    if (both is True):
+        plt.figure(figsize=(5,5))    
+        sns.displot(df, x=feature_to_plot, hue="is_signal", hue_order = [1, 0], kind="kde", fill=True)
+        plt.title(feature_to_plot + ' ' + str(title_add))
