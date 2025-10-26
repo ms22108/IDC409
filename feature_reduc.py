@@ -43,3 +43,10 @@ y = df['is_signal']
 model = RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1)
 model.fit(feature_columns, y)
 
+feature_importance_df = pd.DataFrame({
+    'Feature': feature_columns.columns,
+    'Importance': model.feature_importances_
+}).sort_values(by='Importance', ascending=False)
+K_FEATURES_TO_KEEP = 38
+print(feature_importance_df.head(K_FEATURES_TO_KEEP))
+
