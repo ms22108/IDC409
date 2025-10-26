@@ -28,4 +28,10 @@ print(f"Features to drop: {to_drop}")
 df_reduced = df.drop(columns=to_drop)
 print(f"\nNumber of features after reduction: {df_reduced.shape[1] - 3}")
 
+# plot new correlation matrix with reduced features
+new_corr_matrix = df_reduced.drop(columns=['type', 'is_signal', 'Unnamed: 0']).corr().abs()
+plt.figure(figsize=(10, 10))
+sns.set(font_scale=0.8)
+sns.heatmap(new_corr_matrix, cmap='magma', annot=False)
+plt.title("New correlation matrix")
 
