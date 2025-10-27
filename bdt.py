@@ -64,7 +64,7 @@ plt.legend(facecolor='white', fontsize=12)
 
 plt.show()
 
-<<<<<<< HEAD
+
 from sklearn.metrics import confusion_matrix
 y_pred_binary = (y_pred_proba > 0.5).astype(int)
 cm = confusion_matrix(y_test, y_pred_binary)
@@ -88,7 +88,7 @@ test_df_with_predictions = X_test.copy()
 test_df_with_predictions['is_signal'] = y_test
 test_df_with_predictions['bdt_score'] = y_pred_proba
 events_passing_cut = test_df_with_predictions[test_df_with_predictions['bdt_score'] > bdt_cut_value]
-=======
+
 # plotting roc
 print("plotting roc, confusion matrix")
 fpr_bdt, tpr_bdt, thresholds = roc_curve(y_test, y_pred_proba)
@@ -105,4 +105,4 @@ plt.xlim([0.0, 1.0])
 plt.ylim([0.0, 1.05])
 ax.set_facecolor('white')
 plt.show()
->>>>>>> 4573d491a05a4d5b5482727a2f1fc14de50db204
+
