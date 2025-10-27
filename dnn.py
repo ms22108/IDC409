@@ -106,3 +106,12 @@ plt.title('Receiver Operating Characteristic (ROC) Curve')
 plt.legend()
 plt.grid()
 plt.show()
+
+# applying cuts
+print("applying cuts...")
+y_pred_proba_test = model.predict(X_test_scaled).ravel()
+
+# combine results into a dataframe for plotting
+results_df = pd.DataFrame({'true_label': y_test, 'dnn_score': y_pred_proba})
+signal_scores = results_df[results_df['true_label'] == 1]['dnn_score']
+background_scores = results_df[results_df['true_label'] == 0]['dnn_score']
