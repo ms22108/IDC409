@@ -73,3 +73,9 @@ plt.title('Confusion Matrix', fontsize=16)
 plt.ylabel('Actual Label', fontsize=12)
 plt.xlabel('Predicted Label', fontsize=12)
 plt.show()
+
+# Applying cuts on the distribution
+print("Applying cuts on the distribution")
+signal_efficiency_target = 0.90
+cut_value = np.quantile(signal_scores, 1 - signal_efficiency_target)
+print(f"To achieve {signal_efficiency_target*100:.0f}% signal efficiency, the cut is: {cut_value:.3f}")
