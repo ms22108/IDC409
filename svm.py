@@ -23,3 +23,15 @@ X_test_scaled = scaler.transform(X_test)
 
 svm_model = SVC(kernel='rbf', probability=True, random_state=42)
 svm_model.fit(X_train_scaled, y_train)
+
+# we are going to plot roc 
+print("plotting ROC, confusion matrix...")
+from sklearn.metrics import (classification_report,confusion_matrix,ConfusionMatrixDisplay,roc_curve,roc_auc_score)
+import matplotlib.pyplot as plt
+import numpy as np
+
+y_pred = svm_model.predict(X_test_scaled)
+y_pred_proba = svm_model.predict_proba(X_test_scaled)[:, 1]
+
+# precision, recall, f1 score
+print(classification_report(y_test, y_pred, target_names=['Background (0)', 'Signal (1)']))
