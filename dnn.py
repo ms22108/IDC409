@@ -35,3 +35,12 @@ model.add(Dropout(0.3))
 # second hidden layer
 model.add(Dense(32, activation='relu'))
 model.add(Dropout(0.3))
+
+# output layer
+model.add(Dense(1, activation='sigmoid'))
+
+print("\nModel architecture summary:")
+model.summary()
+
+# compile model
+model.compile(optimizer='adam',  loss='binary_crossentropy',  metrics=['accuracy'])
