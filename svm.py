@@ -35,3 +35,23 @@ y_pred_proba = svm_model.predict_proba(X_test_scaled)[:, 1]
 
 # precision, recall, f1 score
 print(classification_report(y_test, y_pred, target_names=['Background (0)', 'Signal (1)']))
+
+# confusion
+cm = confusion_matrix(y_test, y_pred)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['Background', 'Signal'])
+disp.plot(cmap='Blues')
+plt.title("SVM Confusion Matrix")
+plt.show()
+
+# ROC plotting
+fpr_svm, tpr_svm, thresholds = roc_curve(y_test, y_pred_proba)
+auc_score_svm = roc_auc_score(y_test, y_pred_proba)
+plt.figure(figsize=(8, 6))
+plt.plot(fpr_svm, tpr_svm, color='blue', label=f'SVM (AUC = {auc_score_svm:.2f})')
+plt.plot([0, 1], [0, 1], color='grey', linestyle='--')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic (ROC) Curve')
+plt.legend()
+plt.grid()
+plt.show()
