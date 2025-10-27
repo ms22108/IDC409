@@ -7,3 +7,11 @@ import re
 df = df.rename(columns = lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
 df_reduced = df_reduced.rename(columns = lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
 
+# separate target and feature
+y = df_reduced['is_signal']
+X = df_reduced.drop(columns=['type', 'is_signal', 'Unnamed0'])
+
+# split into train and test features
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42, stratify=y
+)
