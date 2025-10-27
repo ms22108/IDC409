@@ -54,3 +54,13 @@ history = model.fit(
     validation_data=(X_test_scaled, y_test),
     verbose=1 
 )
+
+# viewing training history
+print("viewing training history")
+from sklearn.metrics import (
+    classification_report,
+    confusion_matrix,
+    ConfusionMatrixDisplay,
+    roc_curve,
+    roc_auc_score
+)
