@@ -55,3 +55,12 @@ plt.title('Receiver Operating Characteristic (ROC) Curve')
 plt.legend()
 plt.grid()
 plt.show()
+
+# applying cuts
+print("applying cuts...")
+y_pred_proba = svm_model.predict_proba(X_test_scaled)[:, 1]
+
+# combine results into a dataframe for plotting
+results_df = pd.DataFrame({'true_label': y_test, 'svm_score': y_pred_proba})
+signal_scores = results_df[results_df['true_label'] == 1]['svm_score']
+background_scores = results_df[results_df['true_label'] == 0]['svm_score']
