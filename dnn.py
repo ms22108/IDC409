@@ -74,3 +74,15 @@ plt.gca().set_ylim(0, 1)
 plt.title("DNN Model Training History (Loss & Accuracy)")
 plt.xlabel("Epoch")
 plt.show()
+
+# we are going to plot roc 
+print("plotting roc, confusion matrix...")
+from sklearn.metrics import (classification_report,confusion_matrix,ConfusionMatrixDisplay,roc_curve,roc_auc_score)
+import matplotlib.pyplot as plt
+import numpy as np
+
+y_pred_proba = model.predict(X_test_scaled).ravel()
+y_pred = (y_pred_proba > 0.5).astype(int)
+
+# precision, recall, f1 score
+print(classification_report(y_test, y_pred, target_names=['Background (0)', 'Signal (1)']))
