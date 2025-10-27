@@ -36,4 +36,16 @@ signal_scores = results_df[results_df['true_label'] == 1]['bdt_score']
 background_scores = results_df[results_df['true_label'] == 0]['bdt_score']
 
 # Checking for overtraining - this is the case if train curves look sharper
+y_train_prob = lgbm_classifier.predict_proba(X_train)[:, 1]
+train_df = pd.DataFrame({'true_label': y_train, 'bdt_score': y_train_prob})
+train_signal_scores = train_df[train_df['true_label'] == 1]['bdt_score']
+train_background_scores = train_df[train_df['true_label'] == 0]['bdt_score']
 
+
+plt.figure(figsize=(6, 4))
+
+
+plt.hist(background_scores, bins=50, range=(0, 1), label='Background',
+         histtype='step', density=True, color='red', linewidth=1)
+plt.hist(signal_scores, bins=50, range=(0, 1), label='Signal',
+         histtype='step', density=True, color='blue', linewidth=1)
