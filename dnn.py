@@ -108,6 +108,15 @@ plt.grid()
 plt.show()
 
 
+# applying cuts
+print("applying cuts...")
+y_pred_proba_test = model.predict(X_test_scaled).ravel()
+
+# combine results into a dataframe for plotting
+results_df = pd.DataFrame({'true_label': y_test, 'dnn_score': y_pred_proba})
+signal_scores = results_df[results_df['true_label'] == 1]['dnn_score']
+background_scores = results_df[results_df['true_label'] == 0]['dnn_score']
+
 signal_efficiency_target = 0.90
 cut_value = np.quantile(signal_scores, 1 - signal_efficiency_target)
 print(f"To achieve {signal_efficiency_target*100:.0f}% signal efficiency, the cut is: {cut_value:.3f}")
@@ -117,11 +126,3 @@ n_background_after = (background_scores > cut_value).sum()
 background_rejection = 1 - (n_background_after / n_background_before)
 print(f"Background rejection at this cut: {background_rejection * 100:.2f}%")
 
-# applying cuts
-print("applying cuts...")
-y_pred_proba_test = model.predict(X_test_scaled).ravel()
-
-# combine results into a dataframe for plotting
-results_df = pd.DataFrame({'true_label': y_test, 'dnn_score': y_pred_proba})
-signal_scores = results_df[results_df['true_label'] == 1]['dnn_score']
-background_scores = results_df[results_df['true_label'] == 0]['dnn_score']
