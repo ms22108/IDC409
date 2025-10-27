@@ -91,3 +91,8 @@ def var_suppressed(feature):
         test_df_with_predictions = X.loc[y_test.index].copy()
         test_df_with_predictions['is_signal'] = y_test
         test_df_with_predictions['logreg_score'] = y_pred_proba
+
+# Separate signal and background for plotting
+        signal_before_cut = test_df_with_predictions[test_df_with_predictions['is_signal'] == 1]
+        background_before_cut = test_df_with_predictions[test_df_with_predictions['is_signal'] == 0]
+
