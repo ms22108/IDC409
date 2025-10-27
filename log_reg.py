@@ -84,3 +84,10 @@ n_background_before = len(background_scores)
 n_background_after = (background_scores > cut_value).sum()
 background_rejection = 1 - (n_background_after / n_background_before)
 print(f"Background rejection at this cut: {background_rejection * 100:.2f}%")
+
+def var_suppressed(feature):
+    if feature in X.columns:
+        # Reconstruct a DataFrame with the original (unscaled) test data and predictions
+        test_df_with_predictions = X.loc[y_test.index].copy()
+        test_df_with_predictions['is_signal'] = y_test
+        test_df_with_predictions['logreg_score'] = y_pred_proba
