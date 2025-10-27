@@ -100,3 +100,11 @@ def var_suppressed(feature):
         events_passing_cut = test_df_with_predictions[test_df_with_predictions['logreg_score'] > cut_value]
         signal_after_cut = events_passing_cut[events_passing_cut['is_signal'] == 1]
         background_after_cut = events_passing_cut[events_passing_cut['is_signal'] == 0]
+
+    
+       
+        plt.figure(figsize=(10, 6))
+        sns.histplot(data=background_before_cut, x=feature, bins=100, 
+                     label='Background before cut', color='grey', alpha=0.7)
+        sns.histplot(data=signal_before_cut, x=feature, bins=100, 
+                     label='Signal before cut', color='blue', alpha=0.7, element='step', linewidth=2)
