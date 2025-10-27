@@ -25,3 +25,15 @@ lgbm_classifier.fit(X_train, y_train, eval_set=[(X_test, y_test)], eval_metric='
 print("plotting classifier output distribution")
 import matplotlib
 import matplotlib.pyplot as plt
+
+# Evaluating the model
+print("model evaluation...")
+y_pred_proba = lgbm_classifier.predict_proba(X_test)[:, 1]
+
+# Combine test results into a single DataFrame for easier plotting
+results_df = pd.DataFrame({'true_label': y_test, 'bdt_score': y_pred_proba})
+signal_scores = results_df[results_df['true_label'] == 1]['bdt_score']
+background_scores = results_df[results_df['true_label'] == 0]['bdt_score']
+
+# Checking for overtraining - this is the case if train curves look sharper
+
