@@ -44,3 +44,13 @@ model.summary()
 
 # compile model
 model.compile(optimizer='adam',  loss='binary_crossentropy',  metrics=['accuracy'])
+
+# training
+history = model.fit(
+    X_train_scaled,
+    y_train,
+    epochs=20,
+    batch_size=64,
+    validation_data=(X_test_scaled, y_test),
+    verbose=1 
+)
