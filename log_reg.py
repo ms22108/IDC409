@@ -117,3 +117,8 @@ def var_suppressed(feature):
         plt.title(f'Effect of Logistic Regression Cut on {feature} Distribution', fontsize=16)
         plt.legend()
         plt.show()
+
+var_suppressed('R2')
+var_suppressed('thrustOm')
+var_suppressed('CleoConeCS__bo2__bc')
+var_suppressed('CleoConeCS__bo6__bc')
