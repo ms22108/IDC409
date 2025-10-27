@@ -64,3 +64,13 @@ from sklearn.metrics import (
     roc_curve,
     roc_auc_score
 )
+
+import matplotlib.pyplot as plt
+
+# plotting training history
+pd.DataFrame(history.history).plot(figsize=(10, 6))
+plt.grid(True)
+plt.gca().set_ylim(0, 1)
+plt.title("DNN Model Training History (Loss & Accuracy)")
+plt.xlabel("Epoch")
+plt.show()
