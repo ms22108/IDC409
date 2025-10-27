@@ -49,3 +49,17 @@ plt.hist(background_scores, bins=50, range=(0, 1), label='Background',
          histtype='step', density=True, color='red', linewidth=1)
 plt.hist(signal_scores, bins=50, range=(0, 1), label='Signal',
          histtype='step', density=True, color='blue', linewidth=1)
+
+plt.hist(train_background_scores, bins=50, range=(0, 1), label='Background train',
+         histtype='step', density=True, color='black', linewidth=2)
+plt.hist(train_signal_scores, bins=50, range=(0, 1), label='Signal train',
+         histtype='step', density=True, color='green', linewidth=2)
+ax.grid(True, which='both', linestyle='--', linewidth=0.5)
+plt.title('Classifier Output Distribution', fontsize=16)
+plt.xlabel('BDT Score (Continuum Probability)', fontsize=12)
+plt.ylabel('Normalized Frequency', fontsize=12)
+#plt.yscale('log')
+plt.legend(facecolor='white', fontsize=12)
+#plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+
+plt.show()
