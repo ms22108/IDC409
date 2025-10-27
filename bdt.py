@@ -63,3 +63,27 @@ plt.legend(facecolor='white', fontsize=12)
 #plt.grid(True, which='both', linestyle='--', linewidth=0.5)
 
 plt.show()
+
+from sklearn.metrics import confusion_matrix
+y_pred_binary = (y_pred_proba > 0.5).astype(int)
+cm = confusion_matrix(y_test, y_pred_binary)
+plt.figure(figsize=(4, 3))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Oranges',
+            xticklabels=['Background', 'Signal'],
+            yticklabels=['Background', 'Signal'])
+plt.title('Confusion Matrix', fontsize=14)
+plt.ylabel('Actual Label', fontsize=12)
+plt.xlabel('Predicted Label', fontsize=12)
+
+print("applying cuts")
+# Applying a cut on the BDT score
+# keep 90% of signal events
+signal_efficiency_target = 0.9
+bdt_cut_value = np.quantile(signal_scores, 1 - signal_efficiency_target)
+print(f'To achieve {signal_efficiency_target*100:.0f}% signal efficiency, the cut on BDT score is: {bdt_cut_value:.3f}')
+
+# Applying cut to test set
+test_df_with_predictions = X_test.copy()
+test_df_with_predictions['is_signal'] = y_test
+test_df_with_predictions['bdt_score'] = y_pred_proba
+events_passing_cut = test_df_with_predictions[test_df_with_predictions['bdt_score'] > bdt_cut_value]
