@@ -19,3 +19,19 @@ print(X.head())
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.3, random_state=42, stratify=y
 )
+
+# feature scaling
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+n_features = X_train_scaled.shape[1]
+model = Sequential()
+
+# input layer and first hidden layer
+model.add(Dense(64, activation='relu', input_shape=(n_features,)))
+model.add(Dropout(0.3))
+
+# second hidden layer
+model.add(Dense(32, activation='relu'))
+model.add(Dropout(0.3))
