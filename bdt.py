@@ -106,5 +106,19 @@ test_df_with_predictions['is_signal'] = y_test
 test_df_with_predictions['bdt_score'] = y_pred_proba
 events_passing_cut = test_df_with_predictions[test_df_with_predictions['bdt_score'] > bdt_cut_value]
 
+# Calculate background rejection
+n_background_before = len(test_df_with_predictions[test_df_with_predictions['is_signal'] == 0])
+n_background_after = len(events_passing_cut[events_passing_cut['is_signal'] == 0])
+background_rejection = 1 - (n_background_after / n_background_before)
+print(f"Background rejection at this cut: {background_rejection * 100:.2f}%")
+
+# Plotting something after cut
+def var_suppressed(feature):
+    if feature in X_test.columns:
+        figure, ax = plt.subplots(figsize=(6, 4))
+        # Plot background before cut
+        sns.histplot(test_df_with_predictions[test_df_with_predictions['is_signal'] == 0][feature],
+                     bins=100, label='Background (Before Cut)', color='gray', alpha=0.5)
+
 
 
