@@ -1,8 +1,8 @@
 # Machine Learning Model for Continuum Suppression
 In this project we have used machine learning models (Logistic Regression, SVM, DNN and BDT) to separate signal and background events.
 
-Course: IDC409 Project  
-Author:Riddhi Panja (MS22237) ; Pragnya Mishra (MS22108)
+Course: **IDC409 Project**  
+Author: **Riddhi Panja (MS22237)**; **Pragnya Mishra (MS22108)**
 
 
 # The Problem : Finding a Needle in a Haystack
@@ -28,11 +28,11 @@ pip install pandas numpy scikit-learn tensorflow matplotlib seaborn re lightgbm
    ```
 2) Prerequisite
 Before running any models, you must first process the raw data and generate the optimized feature set.
-**Run this script once to prepare all data:**
+**Run this script once (before each model) to prepare all data:**
 ```bash
 feature_reduc.py
 ```
-3) Models
+3) Models: **run the following scripts for each model:**
    ```bash
    log_reg.py
    svm.py
