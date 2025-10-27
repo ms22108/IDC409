@@ -86,3 +86,23 @@ y_pred = (y_pred_proba > 0.5).astype(int)
 
 # precision, recall, f1 score
 print(classification_report(y_test, y_pred, target_names=['Background (0)', 'Signal (1)']))
+
+# confusion
+cm = confusion_matrix(y_test, y_pred)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['Background', 'Signal'])
+disp.plot(cmap='Greens')
+plt.title("DNN Confusion Matrix")
+plt.show()
+
+# ROC plotting
+fpr_dnn, tpr_dnn, thresholds = roc_curve(y_test, y_pred_proba)
+auc_score_dnn = roc_auc_score(y_test, y_pred_proba)
+plt.figure(figsize=(8, 6))
+plt.plot(fpr_dnn, tpr_dnn, color='green', label=f'DNN (AUC = {auc_score_dnn:.4f})')
+plt.plot([0, 1], [0, 1], color='grey', linestyle='--')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic (ROC) Curve')
+plt.legend()
+plt.grid()
+plt.show()
