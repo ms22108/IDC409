@@ -107,6 +107,16 @@ plt.legend()
 plt.grid()
 plt.show()
 
+
+signal_efficiency_target = 0.90
+cut_value = np.quantile(signal_scores, 1 - signal_efficiency_target)
+print(f"To achieve {signal_efficiency_target*100:.0f}% signal efficiency, the cut is: {cut_value:.3f}")
+
+n_background_before = len(background_scores)
+n_background_after = (background_scores > cut_value).sum()
+background_rejection = 1 - (n_background_after / n_background_before)
+print(f"Background rejection at this cut: {background_rejection * 100:.2f}%")
+
 # applying cuts
 print("applying cuts...")
 y_pred_proba_test = model.predict(X_test_scaled).ravel()
