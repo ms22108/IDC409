@@ -127,3 +127,19 @@ def var_suppressed(feature):
         sns.histplot(events_passing_cut[events_passing_cut['is_signal'] == 1][feature],
                      bins=100, label=f'Background (After Cut)', color='black', alpha=0.5)
 
+        # Plot background after cut
+        sns.histplot(events_passing_cut[events_passing_cut['is_signal'] == 0][feature],
+                     bins=100, label=f'Background (After Cut)', color='red')
+    
+        plt.title(f'BDT Cut on {feature}', fontsize=14)
+        plt.xlabel(feature, fontsize=12)
+        plt.ylabel('Number of Events', fontsize=12)
+        plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+        
+        plt.show()
+        
+var_suppressed('R2')
+var_suppressed('thrustOm')
+var_suppressed('CleoConeCS__bo2__bc')
+var_suppressed('CleoConeCS__bo6__bc')
+
