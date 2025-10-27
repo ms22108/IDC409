@@ -84,3 +84,18 @@ def var_suppressed(feature):
         # Separate signal and background for plotting
         signal_before_cut = test_df_with_predictions[test_df_with_predictions['is_signal'] == 1]
         background_before_cut = test_df_with_predictions[test_df_with_predictions['is_signal'] == 0]
+
+    
+        # Apply the cut
+        events_passing_cut = test_df_with_predictions[test_df_with_predictions['svm_score'] > cut_value]
+        signal_after_cut = events_passing_cut[events_passing_cut['is_signal'] == 1]
+        background_after_cut = events_passing_cut[events_passing_cut['is_signal'] == 0]
+    
+        # Create side-by-side plots
+        plt.figure(figsize=(10, 6))
+        
+        # before and after
+        sns.histplot(data=background_before_cut, x=feature, bins=100, 
+                     label='Background before cut', color='grey', alpha=0.7)
+        sns.histplot(data=signal_before_cut, x=feature, bins=100, 
+                     label='Signal before cut', color='blue', alpha=0.7, element='step', linewidth=2)
