@@ -99,3 +99,19 @@ def var_suppressed(feature):
                      label='Background before cut', color='grey', alpha=0.7)
         sns.histplot(data=signal_before_cut, x=feature, bins=100, 
                      label='Signal before cut', color='blue', alpha=0.7, element='step', linewidth=2)
+
+  
+        
+        sns.histplot(data=signal_after_cut, x=feature, bins=100, 
+                     label='Signal after cut', color='black', alpha=0.7, element='step', linewidth=2)
+        sns.histplot(data=background_after_cut, x=feature, bins=100, 
+                     label='Background after cut', color='red', alpha=0.7)
+        plt.grid(True, linestyle='--', linewidth=0.5)
+        plt.title(f'Effect of SVM Cut on {feature} Distribution', fontsize=16)
+        plt.legend()
+        plt.show()
+
+var_suppressed('R2')
+var_suppressed('thrustOm')
+var_suppressed('CleoConeCS__bo2__bc')
+var_suppressed('CleoConeCS__bo6__bc')
