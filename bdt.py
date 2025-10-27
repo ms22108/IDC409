@@ -120,5 +120,10 @@ def var_suppressed(feature):
         sns.histplot(test_df_with_predictions[test_df_with_predictions['is_signal'] == 0][feature],
                      bins=100, label='Background (Before Cut)', color='gray', alpha=0.5)
 
-
+        
+        # Plot signal for reference
+        sns.histplot(test_df_with_predictions[test_df_with_predictions['is_signal'] == 1][feature],
+                     bins=100, label='Signal (Reference)', color='blue', alpha=0.5, element='step', linewidth=2)
+        sns.histplot(events_passing_cut[events_passing_cut['is_signal'] == 1][feature],
+                     bins=100, label=f'Background (After Cut)', color='black', alpha=0.5)
 
