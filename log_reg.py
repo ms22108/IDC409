@@ -92,7 +92,11 @@ def var_suppressed(feature):
         test_df_with_predictions['is_signal'] = y_test
         test_df_with_predictions['logreg_score'] = y_pred_proba
 
-# Separate signal and background for plotting
+	# Separate signal and background for plotting
         signal_before_cut = test_df_with_predictions[test_df_with_predictions['is_signal'] == 1]
         background_before_cut = test_df_with_predictions[test_df_with_predictions['is_signal'] == 0]
-
+    
+        # Apply the cut
+        events_passing_cut = test_df_with_predictions[test_df_with_predictions['logreg_score'] > cut_value]
+        signal_after_cut = events_passing_cut[events_passing_cut['is_signal'] == 1]
+        background_after_cut = events_passing_cut[events_passing_cut['is_signal'] == 0]
